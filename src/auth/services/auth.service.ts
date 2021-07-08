@@ -29,7 +29,6 @@ export class AuthService {
 
   async validateUser(authLoginDto: AuthLoginDto): Promise<Users> {
     const { email, password } = authLoginDto;
-    console.log('FOUND USER', authLoginDto);
 
     const user = await this.usersService.findByEmail(email);
     if (!(await user?.validatePassword(password))) {
