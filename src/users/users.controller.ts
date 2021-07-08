@@ -9,6 +9,6 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   me(@Request() req) {
-    return this.usersService.showById(req.user.id);
+    return this.usersService.showById(req.user.userId);
   }
 }

@@ -4,11 +4,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-
+import { Account } from 'src/account/entities/account.entity';
 @Entity()
 export class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -25,6 +27,10 @@ export class Users extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToOne(() => Account, (account) => account.user)
+  @JoinColumn()
+  account: Account;
 
   @Column()
   @CreateDateColumn()

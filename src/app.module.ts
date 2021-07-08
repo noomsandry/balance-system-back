@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TransactionModule } from './transaction/transaction.module';
-import { BalanceModule } from './balance/balance.module';
 import { AuthModule } from './auth/auth.module';
 import { AccountModule } from './account/account.module';
 
@@ -13,18 +12,17 @@ import { AccountModule } from './account/account.module';
   imports: [
     UsersModule,
     TransactionModule,
-    BalanceModule,
     AuthModule,
+    AccountModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.db',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/**/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    AccountModule,
   ],
   controllers: [AppController],
   providers: [AppService],
