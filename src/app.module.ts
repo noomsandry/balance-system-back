@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { BalanceModule } from './balance/balance.module';
 import { AuthModule } from './auth/auth.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    AccountModule,
   ],
   controllers: [AppController],
   providers: [AppService],
