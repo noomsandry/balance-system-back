@@ -13,13 +13,13 @@ export class AuthService {
 
   async login(authLoginDto: AuthLoginDto) {
     const user = await this.validateUser(authLoginDto);
-
+    delete user.password;
     const payload = {
       userId: user.id,
     };
-
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
+      user,
     };
   }
 
