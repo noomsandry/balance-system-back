@@ -1,12 +1,29 @@
-import { Users } from 'src/users/entities/users.entity';
-import { PrimaryGeneratedColumn, Column, Entity, OneToOne } from 'typeorm';
+import { Transaction } from 'src/transaction/entities/transaction.entity';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm';
+
 @Entity()
-export class Account {
+export class Account extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
   balance: number;
 
-  @OneToOne(() => Users, (user) => user.account) // specify inverse side as a second parameter
-  user: Users;
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @OneToMany((type) => Transaction, (t) => t.account)
+  transactions: Transaction[];
 }

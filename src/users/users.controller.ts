@@ -8,7 +8,8 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  me(@Request() req) {
-    return this.usersService.showById(req.user.userId);
+  async me(@Request() req) {
+    const user = await this.usersService.findOne(req.user.userId);
+    return { user };
   }
 }

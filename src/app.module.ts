@@ -14,12 +14,7 @@ import { AccountModule } from './account/account.module';
     TransactionModule,
     AuthModule,
     AccountModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.db',
-      entities: [__dirname + '/**/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
