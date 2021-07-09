@@ -1,5 +1,4 @@
 import { Transaction } from 'src/transaction/entities/transaction.entity';
-import { Users } from 'src/users/entities/users.entity';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -8,7 +7,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  OneToOne,
 } from 'typeorm';
 
 @Entity()
@@ -26,9 +24,6 @@ export class Account extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Transaction, (t) => t.account, { nullable: false })
+  @OneToMany(() => Transaction, (t) => t.account)
   transactions: Transaction[];
-
-  @OneToOne(() => Users)
-  user: Users;
 }

@@ -27,7 +27,7 @@ export class Transaction extends BaseEntity {
   @Column({ nullable: false, type: 'float', default: 0.0 })
   balance: number;
 
-  @ManyToOne(() => Account, (a) => a.transactions, { nullable: false })
+  @ManyToOne(() => Account)
   @JoinColumn()
   account: Account;
 
