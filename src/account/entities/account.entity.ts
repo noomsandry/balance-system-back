@@ -1,4 +1,5 @@
 import { Transaction } from 'src/transaction/entities/transaction.entity';
+import { Users } from 'src/users/entities/users.entity';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -7,13 +8,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 
 @Entity()
 export class Account extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({ nullable: false, type: 'float', default: 0.0 })
   balance: number;
 
   @Column()
@@ -24,6 +26,9 @@ export class Account extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany((type) => Transaction, (t) => t.account)
+  @OneToMany(() => Transaction, (t) => t.account, { nullable: false })
   transactions: Transaction[];
+
+  @OneToOne(() => Users)
+  user: Users;
 }

@@ -21,13 +21,13 @@ export class Transaction extends BaseEntity {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ nullable: false, type: 'float', default: 0.0 })
   amount: number;
 
-  @Column()
+  @Column({ nullable: false, type: 'float', default: 0.0 })
   balance: number;
 
-  @ManyToOne(() => Account)
+  @ManyToOne(() => Account, (a) => a.transactions, { nullable: false })
   @JoinColumn()
   account: Account;
 
