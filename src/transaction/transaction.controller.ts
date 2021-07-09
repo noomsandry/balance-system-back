@@ -49,25 +49,29 @@ export class TransactionController {
 
     createTransactionDto.balance = account.balance;
 
-    /**
-     * save transaction
-     * update account balance
-     */
     let newTransaction;
-
+    /**
+     * create transaction
+     */
     const transaction = await this.transactionService.create(
       createTransactionDto,
     );
     transaction.account = account;
 
     /**
-     * start transaction
+     * start transaction query
      */
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
+      /**
+       * save transaction
+       */
       newTransaction = await queryRunner.manager.save(transaction);
+      /**
+       * update account current balance
+       */
       await queryRunner.manager.update(
         Account,
         { id: account.id },
